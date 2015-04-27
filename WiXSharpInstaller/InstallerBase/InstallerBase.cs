@@ -7,21 +7,39 @@ namespace InstallerCommonBase
     {
         public Project InstallerProject { get; set; }
 
+        public virtual string ActiveConfigurationName
+        {
+            get
+            {
+                #if(DEBUG)
+                    return "Debug";
+                #else
+                    reutrn "Release";
+                #endif
+            }
+        }
+
+        /// <summary>
+        /// Returns 
+        /// </summary>
+        public virtual string ActivePlatformName
+        {
+            get
+            {
+                return Environment.Is64BitProcess ? "x64" : "x86";
+            }
+        }
+
         protected InstallerBase(string projectName, string projectOutFileName, Guid projectGuid)
         {
-            InstallerProject = new Project()
+            InstallerProject = new Project
             {
                 Name = projectName,
                 OutFileName = projectOutFileName,
                 GUID = projectGuid,
                 UI = WUI.WixUI_InstallDir,
-                //Codepage = "Windows-1252",
-                //Language = "en-US",
+                ControlPanelInfo = {Manufacturer = "DreamTeam Company"}
             };
-
-            InstallerProject.Manufacturer = "DreamTeam Company";
-            //InstallerProject.ControlPanelInfo.Manufacturer = "DreamTeam Company";
-
         }
 
         protected InstallerBase(string projectName, string projectOutFileName)

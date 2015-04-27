@@ -1305,6 +1305,11 @@
             Defines values (names) for the standard WiX dialogs. 
             </summary>
         </member>
+        <member name="F:WixSharp.Dialogs.CustomizeDlg">
+            <summary>
+            The customize features dialog
+            </summary>
+        </member>
         <member name="T:WixSharp.Buttons">
             <summary>
             Defines values (names) for the WiX custom UI predefined buttons. 
@@ -1765,16 +1770,16 @@
             <param name="items">Another instance of <see cref="T:System.Array"/> whose elements to combine with <c>obj</c>.</param>
             <returns>A combined <see cref="T:System.Array"/>.</returns>
         </member>
-        <member name="M:WixSharp.Extensions.Add``1(System.Array,``0)">
+        <member name="M:WixSharp.Extensions.Add``2(``0[],``1)">
             <summary>
             Adds/combines given <see cref="T:System.Array"/> object with the specified item.
             </summary>
-            <typeparam name="T">The type of the elements of <c>obj</c>.</typeparam>
+            <typeparam name="T1">The type of the elements of <c>obj</c>.</typeparam>
             <param name="obj">The instance of the <see cref="T:System.Array"/>.</param>
             <param name="item">The item to be added.</param>
             <returns>Combined <see cref="T:System.Array"/> object.</returns>
         </member>
-        <member name="M:WixSharp.Extensions.AddRange``1(System.Array,System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:WixSharp.Extensions.AddRange``2(``0[],System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Adds/combines given <see cref="T:System.Array"/> object with the specified items.
             </summary>
@@ -3539,6 +3544,7 @@
             project.ControlPanelInfo.UrlUpdateInfo = "https://wixsharp.codeplex.com/update";
             project.ControlPanelInfo.ProductIcon = "app_icon.ico";
             project.ControlPanelInfo.Contact = "Product owner";
+            project.ControlPanelInfo.Manufacturer = "My Company";
             project.ControlPanelInfo.InstallLocation = "[INSTALLDIR]";        
             project.ControlPanelInfo.NoModify = true;
             project.ControlPanelInfo.NoRepair = true,
@@ -3548,6 +3554,11 @@
             Compiler.BuildMsi(project);
             </code>
             </example>
+            </summary>
+        </member>
+        <member name="F:WixSharp.ProductInfo.Manufacturer">
+            <summary>
+            Product manufacturer name
             </summary>
         </member>
         <member name="P:WixSharp.ProductInfo.Comments">
@@ -3756,6 +3767,11 @@
             <para>The default value is <c>false</c>: all temporary files are deleted at the end of the build/compilation.</para>
             <para>Note: if <see cref="T:WixSharp.Compiler"/> fails to build MSI the <c>PreserveTempFiles</c>
             value is ignored and all temporary files are preserved.</para>
+            </summary>
+        </member>
+        <member name="F:WixSharp.Compiler.EmitRelativePaths">
+            <summary>
+            Indicates whether compiler should emit relative or absolute paths in the WiX XML source.
             </summary>
         </member>
         <member name="M:WixSharp.Compiler.BuildMsi(WixSharp.Project)">
@@ -4371,7 +4387,7 @@
             which are not matching any <see cref="F:WixSharp.Files.ExcludeMasks"/>.
             </summary>
             <param name="baseDirectory">The base directory for file analysis. It is used in conjunction with
-            relative <see cref="F:WixSharp.DirFiles.Directory"/>.</param>
+            relative <see cref="F:WixSharp.Files.Directory"/>. Though <see cref="F:WixSharp.Files.Directory"/> takes precedence if it is an absolute path.</param>
             <returns>Array of <see cref="T:WixSharp.WixEntity"/> instances, which are either <see cref="T:WixSharp.File"/> or/and <see cref="T:WixSharp.Dir"/> objects.</returns>
         </member>
         <member name="T:WixSharp.Feature">
@@ -4574,11 +4590,6 @@
             </code>
             </example>
         </member>
-        <member name="M:WixSharp.DirFiles.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.DirFiles"/> class.
-            </summary>
-        </member>
         <member name="M:WixSharp.DirFiles.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:WixSharp.DirFiles"/> class with properties/fields initialized with specified parameters.
@@ -4664,7 +4675,7 @@
             which are not matching any <see cref="F:WixSharp.DirFiles.ExcludeMasks"/>.
             </summary>
             <param name="baseDirectory">The base directory for file analysis. It is used in conjunction with
-            relative <see cref="F:WixSharp.DirFiles.Directory"/>.</param>
+            relative <see cref="F:WixSharp.DirFiles.Directory"/>.Though <see cref="F:WixSharp.DirFiles.Directory"/> takes precedence if it is an absolute path.</param>
             <returns>Array of <see cref="T:WixSharp.File"/>s.</returns>
         </member>
         <member name="T:WixSharp.InstalledFileAction">
