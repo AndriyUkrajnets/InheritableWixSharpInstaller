@@ -16,6 +16,12 @@ namespace Installer
             installer.InstallerProject.SourceBaseDir = @"..\..\..\..\DesktopApplication";
             
             //Environment.SetEnvironmentVariable("bin", @"bin\$(var.Platform)\$(var.Configuration)");
+            //Environment.SetEnvironmentVariable("bin", @"bin\$(Platform)\$(Configuration)");
+
+            /*
+            var t = Environment.GetEnvironmentVariable("$(Configuration)");
+            t = Environment.GetEnvironmentVariable("$(Platform)");
+            */
 
             Environment.SetEnvironmentVariable("bin", string.Format(@"bin\{0}\{1}", installer.ActivePlatformName, installer.ActiveConfigurationName));
 

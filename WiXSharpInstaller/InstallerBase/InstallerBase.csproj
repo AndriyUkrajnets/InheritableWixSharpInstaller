@@ -103,6 +103,5 @@
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  -->
-  <UsingTask AssemblyFile="packages\WixSharp.1.0.16.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
+  -->  
 </Project>
